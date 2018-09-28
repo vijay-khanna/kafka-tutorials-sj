@@ -1,0 +1,4 @@
+com\demo\kafka\LoginDetails_Core.class
+com\demo\kafka\LoginDetails_Connect.class
+com\demo\kafka\KafkaProducerService_Connect.class
+com\demo\kafka\KafkaProducerService_Core.class
