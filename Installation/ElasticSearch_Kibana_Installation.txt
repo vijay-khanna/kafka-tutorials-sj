@@ -1,0 +1,46 @@
+## ElasticSearch Installation 
+1. Create a Download directory and navigate to it.
+mkdir downloads && cd downloads
+
+2. Download kafka package
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.1.tar.gz
+
+3. Extract the kafka package
+tar -xvzf elasticsearch-6.4.1.tar.gz
+
+4. Modify the below file config/elasticsearch.yml file
+network.host : 0.0.0.0
+also change data and log path.
+
+5. Set the session parameters
+sudo su  
+ulimit -n 65536
+sudo sysctl -w vm.max_map_count=262144 
+su ec2-user
+
+6. Start the ElasticSearch service
+bin/elasticsearch
+
+## Kibana Installation
+ 
+7. Dowload Kibana tar file 
+wget https://artifacts.elastic.co/downloads/kibana/kibana-6.4.1-linux-x86_64.tar.gz
+
+8. Extract the Content
+tar -xvzf kibana-6.4.1-linux-x86_64.tar.gz
+
+9. Remove the tar file
+ rm -rf kibana-6.4.1-linux-x86_64.tar.gz
+
+10. Go into the folder
+cd kibana-6.4.1-linux-x86_64
+
+11. Edit the properties. 
+open config/kibana.yml file
+
+modify properties
+server.name
+elasticsearch.url
+
+12. Start the Service 
+bin/kibana

@@ -1,0 +1,45 @@
+1. Create a Download directory and navigate to it.
+mkdir downloads && cd downloads
+
+2. Download the MySQL package.
+wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
+
+3. Validate the checksum of the file
+md5sum mysql57-community-release-el7-9.noarch.rpm
+
+4. Compare this checksum with the checksum displayed on the below website
+https://dev.mysql.com/downloads/repo/yum/
+
+5. Install the package
+sudo rpm -ivh mysql57-community-release-el7-9.noarch.rpm
+This adds two new MySQL yum repositories, and we can now use them to install MySQL server:
+
+6. Install the MySQL Server
+sudo yum install mysql-server
+Press y to confirm that you want to proceed. Since we've just added the package, we'll also be prompted to accept its GPG key. Press y to download it and complete the install.
+
+7. Now we will start the daemon
+sudo systemctl start mysqld
+systemctl doesn't display the outcome of all service management commands, so to be sure we succeeded, we'll use the following command:
+
+8. Verify if the daemon has actually started
+sudo systemctl status mysqld
+If MySQL has successfully started, the output should contain Active: active (running)
+
+9. During the installation process, a temporary password is generated for the MySQL root user. Locate it in the mysqld.log with this command:
+sudo grep 'temporary password' /var/log/mysqld.log
+
+10.  Make note of the password, which you will need in the next step to secure the installation and where you will be forced to change it. The default password policy requires 12 characters, with at least one uppercase letter, one lowercase letter, one number and one special character.
+hlp;wb%dr0jI
+
+11. MySQL includes a security script to change some of the less secure default options for things like remote root logins and sample users.
+sudo mysql_secure_installation
+Follow the steps and press Y for all the questions being asked
+
+12. Validate if the MySQL has been installed succesfully
+We can verify our installation and get information about it by connecting with the mysqladmin tool, a client that lets you run administrative commands. Use the following command to connect to MySQL as root (-u root), prompt for a password (-p), and return the version.
+mysqladmin -u root -p version
+
+13. Connect to MySQL Client 
+mysql -uroot -pUpgrad2018007#
+

@@ -1,0 +1,46 @@
+sudo yum install java-1.8.0-openjdk
+
+https://www.digitalocean.com/community/tutorials/how-to-install-apache-kafka-on-centos-7
+
+0. Create a data/zookeeper directory within your logged in user
+mkdir -p logs/kafka-logs
+
+1.Create a Download directory and navigate to it.
+mkdir downloads && cd downloads
+
+2. Download kafka package
+wget http://www-us.apache.org/dist/kafka/2.0.0/kafka_2.12-2.0.0.tgz
+
+3. Extract the kafka package
+tar -xvzf kafka_2.12-2.0.0.tgz
+
+4. Remove the tar file
+rm -rf kafka_2.12-2.0.0.tgz
+
+5. Goto the kafka folder and then goto config folder
+cd kafka_2.12-2.0.0 && cd config
+
+6. Open the server.properties file and rename the below parameters
+advertised.listeners=PLAINTEXT://34.199.12.254:9092 <-Replace IP with the public IP
+log.dirs=/home/ec2-user/logs/kafka-logs
+
+7. Go back and start the kafka server
+bin/kafka-server-start.sh config/server.properties
+
+8. Start a new session and create a topic to ensure that the kafka service is available now
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic upgrad_kafka_setup
+
+9. List the Topic
+bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+10. Delete the Topic
+bin/kafka-topics.sh --delete --zookeeper localhost:2181 --topic upgrad_kafka_setup
+
+11. Produce Messages through console.
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic upgrad_kafka_setup
+
+12. Consume Messages through console.
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic upgrad_kafka_setup --from-beginning
+
+13. Check for offsets in Kafka Topic
+bin/kafka-console-consumer.sh --consumer.config /tmp/consumer.config --formatter "kafka.coordinator.group.GroupMetadataManager\$OffsetsMessageFormatter" --topic __consumer_offsets --from-beginning --bootstrap-server localhost:9092

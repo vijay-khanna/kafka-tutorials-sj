@@ -1,0 +1,32 @@
+sudo yum install java-1.8.0-openjdk
+
+0. Create a data/zookeeper directory within your logged in user
+mkdir -p data/zookeeper 
+
+1.Create a Download directory and navigate to it.
+mkdir downloads && cd downloads
+
+2. Download Zookeeper package
+wget http://www-us.apache.org/dist/zookeeper/stable/zookeeper-3.4.12.tar.gz
+
+3. Extract the package
+tar -xvzf zookeeper-3.4.12.tar.gz
+
+4. Remove the downloaded zookeeper tar file
+rm -rf zookeeper-3.4.12.tar.gz
+
+5. Navigate to zookeeper folder
+cd zookeeper-3.4.12/
+
+6. Navigate to the conf folder and rename zoo_sample.cfg file to zoo.cfg
+cd conf
+mv zoo_sample.cfg zoo.cfg
+
+7. Open the zoo.cfg file and change the dataDir to /home/ec2-user/data/zookeeper. Once done , save the file
+vim zoo.cfg
+
+8. Go back and start the zookeeper server
+cd ..
+
+9. verify if zookeeper service has started correctly.
+ps -eaf | grep -i zoo
