@@ -1,0 +1,215 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Upgrad-Kafka",
+		"_postman_id": "e152be0f-608c-f9dc-135a-35b619b69c2a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ConnectInformation",
+			"request": {
+				"url": "http://34.199.12.254:8083",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ConnectorsInformation",
+			"request": {
+				"url": "http://34.199.12.254:8083/connectors",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "RegisteredPlugins",
+			"request": {
+				"url": "http://34.199.12.254:8083/connector-plugins",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ElasticSearchConnectorInformation",
+			"request": {
+				"url": "http://34.199.12.254:8083/connectors/Distributed_ElasticSearch_Sink/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ElasticSearchConnectorCreate",
+			"request": {
+				"url": "http://34.199.12.254:8083/connectors",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"name\" : \"Distributed_ElasticSearch_Sink\",\r\n \"config\" : {\r\n  \"connector.class\" : \"io.confluent.connect.elasticsearch.ElasticsearchSinkConnector\",\r\n  \"tasks.max\" : \"1\",\r\n  \"topics\" : \"kafka_connect\",\r\n  \"connection.url\" : \"http://localhost:9200\",\r\n  \"type.name\" : \"kafka_connect\",\r\n  \"key.ignore\" : \"true\",\r\n  \"schema.ignore\" : \"true\",\r\n  \"schemas.enable\" : \"false\"\r\n }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ElasticSearchDeleteConnector",
+			"request": {
+				"url": "http://34.199.12.254:8083/connectors/second_es_sink",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ElasticSearchData",
+			"request": {
+				"url": {
+					"raw": "http://34.199.12.254:9200/kafka_connect/_search?pretty",
+					"protocol": "http",
+					"host": [
+						"34",
+						"199",
+						"12",
+						"254"
+					],
+					"port": "9200",
+					"path": [
+						"kafka_connect",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": "",
+							"equals": false,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ElasticSearchConnectorStatus",
+			"request": {
+				"url": "http://34.199.12.254:8083/connectors/Distributed_ElasticSearch_Sink/status",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ElasticSearchConnectorTaskInformation",
+			"request": {
+				"url": "http://34.199.12.254:8083/connectors/Distributed_ElasticSearch_Sink/tasks",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ElasticSearchConnectorRestart",
+			"request": {
+				"url": "http://34.199.12.254:8083/connectors/Distributed_ElasticSearch_Sink/restart",
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ElasticSearchConnectorResume",
+			"request": {
+				"url": "http://34.199.12.254:8083/connectors/second_es_sink/resume",
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ElasticSearchConnectorPause",
+			"request": {
+				"url": "http://34.199.12.254:8083/connectors/second_es_sink/pause",
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "LoginCoreAPI",
+			"request": {
+				"url": "localhost:8080/api/logincore",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\t\"username\":\"Dhoni\",\r\t\"product\":\"kafka\",\r\t\"loginTime\":\"{{$timestamp}}\",\r\t\"country\":\"India\",\r\t \"tz\":\"GMT+05:30\",\r\t \"browser\":\"Chrome\",\r\t \"browserVersion\":\"67\",\r\t \"os\":\"Windows 7\",\r      \"osVersion\":\"7\",\t\r      \"deviceType\":\"desktop\"\r}\r"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "LoginConnectAPI",
+			"request": {
+				"url": "localhost:8080/api/loginconnect",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"sourabh\",\n\t\"product\":\"Windows\",\n\t\"country\":\"India\",\n\t \"tz\":\"GMT+05:30\",\n\t \"browser\":\"Chrome\",\n\t \"browserVersion\":\"62\",\n\t \"os\":\"Windows 10\",\n      \"osVersion\":\"10\",\t\n      \"deviceType\":\"desktop\",\n      \"@timestamp\":{{$timestamp}}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
